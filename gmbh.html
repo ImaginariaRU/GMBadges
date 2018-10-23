@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>GM Merit Badges builder</title>
+    <meta name="author" content="">
+    <meta name="author" content="Scripting by Karel Wintersky, 03-04 Apr 2014">
+    <meta charset='UTF-8'>
+    <script src="jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="gmb.js"></script>
+    <script type="text/javascript" src="gmb.config.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            gmbadger.init();
+            $(".gmbadge_button").on('click',function(){
+                $(this).children('img').toggleClass('selected', !$(this).data('is-selected'));
+                $(this).data('is-selected', !$(this).data('is-selected')  );
+                gmbadger.buildResult('#result');
+            });
+            $(".action-select-lang").on('change', function(){
+                gmbadger.setLanguage($(this).val());
+                gmbadger.buildResult('#result');
+            });
+        });
+    </script>
+    <style type="text/css">
+        /* Layout wrappers */
+        html, body {
+            height: 99%;
+        }
+        #wrapper {
+            height: 98%;
+            max-height: 98%;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+        #result-wrapper {
+            height: 25%;
+            max-height: 25%;
+            margin-bottom: 5px;
+        }
+            #badges-result {
+                width: 90%;
+                float: left;
+            }
+            #badges-config {
+                float: left;
+                width: 15%;
+                margin-left: 1em;
+                display: block;
+            }
+        #badges-wrapper {
+            height: 60%;
+            max-height: 60%;
+            vertical-align: top;
+        }
+            #badges-container {
+                width: 100%;
+                height: 100%;
+                overflow-y: scroll;
+                float: left;
+                outline: 0px solid navy;
+            }
+
+        #copyrights-wrapper {
+            padding-top: 1em;
+            clear: both;
+            height: 15%;
+        }
+        /* fieldsets */
+        fieldset {
+            border: 1px solid navy;
+        }
+        fieldset legend {
+            color: navy;
+            font-size: 120%;
+        }
+        /* UL styles */
+        ul {
+            padding: 0;
+            margin: 0;
+        }
+        ul li {
+            list-style: none;
+            display: table;
+        }
+        ul li.title {
+            font-size: 200%;
+            color: navy;
+            width: 100%;
+            text-align: center;
+        }
+        li div {
+            display: table-cell;
+            margin-left: 1em;
+            padding-left: 1em;
+            vertical-align: middle;
+            font-size: 120%;
+            padding-right: 1em;
+        }
+        li div:hover {
+            color: #844def;
+        }
+        /* images & buttons */
+        ul button {
+            width: 74px;
+            height: 75px;
+            padding-top: 4px;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            border-radius: 12px;
+        }
+        ul img {
+            height: 50px;
+            width: 50px;
+            border: 6px solid;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            border-radius: 12px;
+            border-color: transparent;
+        }
+        .selected {
+            border-color: #ae79ff;
+        }
+        /* textareas */
+        textarea#result {
+            width: 100%;
+            height: 100%;
+            resize: none;
+        }
+    </style>
+</head>
+
+<body>
+<div id="wrapper">
+    <div id="result-wrapper">
+        <fieldset>
+            <legend>Результат</legend>
+            <div id="badges-result">
+                <textarea id="result" readonly></textarea>
+            </div>
+            <div id="badges-config">
+                <span class="select-lang"><!-- Language:&nbsp; -->
+                    <select name="lang" class="action-select-lang">
+                        <option value="ru">Russian</option>
+                        <option value="en">English</option>
+                    </select>
+                </span>
+            </div>
+        </fieldset>
+    </div>
+
+    <fieldset id="badges-wrapper">
+        <legend>Бейджики</legend>
+        <div id="badges-container">
+            <ul id="all_badges"></ul>
+        </div>
+    </fieldset>
+    <div id="copyrights-wrapper">
+        <fieldset>
+            <legend>Copyrights</legend>
+            © <a target="_blank" href="http://elthosrpg.blogspot.ru/p/gm-merit-badges-list.html" title="The GM Merit Badges is a very neat expression of many discussions regarding the different Gamesmastering Styles that have evolved over time...">GM Merit Badges List </a>
+            <br>© Scripted by <a target="_blank" href="http://imaginaria.ru/profile/Arris/">Karel Wintersky</a>.
+            <br>© Translated by <a target="_blank" href="http://imaginaria.ru/p/gm-badges-builder.html#comment116482">wisdom of the crowd</a>.
+        </fieldset>
+    </div>
+</div>
+</body>
+</html>
